@@ -10,6 +10,9 @@ from typing import TYPE_CHECKING, Any, Generic, TypeVar
 
 from deebot_client.events import (
     AdvancedModeEvent,
+    AutoEmpty,
+    AutoEmptyEvent,
+    AutoEmptyFrequency,
     AvailabilityEvent,
     BatteryEvent,
     BorderSwitchEvent,
@@ -51,8 +54,6 @@ from deebot_client.events import (
     WaterInfoEvent,
     WorkMode,
     WorkModeEvent,
-    AutoEmpty,
-    AutoEmptyEvent,
 )
 
 if TYPE_CHECKING:
@@ -142,7 +143,7 @@ class CapabilityClean:
     log: CapabilityEvent[CleanLogEvent] | None = None
     preference: CapabilitySetEnable[CleanPreferenceEvent] | None = None
     work_mode: CapabilitySetTypes[WorkModeEvent, WorkMode] | None = None
-    auto_empty: CapabilitySetTypes[AutoEmptyEvent, AutoEmpty] | None = None
+    auto_empty: CapabilitySetTypes[AutoEmptyEvent, AutoEmptyFrequency] | None = None
 
 
 @dataclass(frozen=True)
@@ -188,6 +189,7 @@ class CapabilitySettings:
     """Capabilities for settings."""
 
     advanced_mode: CapabilitySetEnable[AdvancedModeEvent] | None = None
+    auto_empty: CapabilitySetEnable[AutoEmptyEvent, AutoEmpty] | None = None
     carpet_auto_fan_boost: CapabilitySetEnable[CarpetAutoFanBoostEvent] | None = None
     efficiency_mode: CapabilitySetTypes[EfficiencyModeEvent, EfficiencyMode] | None = (
         None

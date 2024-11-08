@@ -124,9 +124,8 @@ DEVICES[short_name(__name__)] = StaticDeviceInfo(
                 get=[GetAutoEmpty()],
                 set=SetAutoEmpty,
                 types=(
-                    AutoEmpty.AUTO_EMPTY_OFF,
-                    AutoEmpty.ON_AUTO,
-                    AutoEmpty.ON_SMART,
+                    AutoEmpty.AUTO,
+                    AutoEmpty.SMART,
                 ),
             ),
             work_mode=CapabilitySetTypes(
