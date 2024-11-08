@@ -46,6 +46,7 @@ from deebot_client.commands.json.multimap_state import (
     GetMultimapState,
     SetMultimapState,
 )
+from deebot_client.commands.json.auto_empty import GetAutoEmpty, SetAutoEmpty
 from deebot_client.commands.json.network import GetNetInfo
 from deebot_client.commands.json.play_sound import PlaySound
 from deebot_client.commands.json.pos import GetPos
@@ -58,6 +59,8 @@ from deebot_client.commands.json.work_mode import GetWorkMode, SetWorkMode
 from deebot_client.const import DataType
 from deebot_client.events import (
     AdvancedModeEvent,
+    AutoEmpty,
+    AutoEmptyEvent,
     AvailabilityEvent,
     BatteryEvent,
     CachedMapInfoEvent,
@@ -115,6 +118,16 @@ DEVICES[short_name(__name__)] = StaticDeviceInfo(
             log=CapabilityEvent(CleanLogEvent, [GetCleanLogs()]),
             preference=CapabilitySetEnable(
                 CleanPreferenceEvent, [GetCleanPreference()], SetCleanPreference
+            ),
+            auto_empty=CapabilitySetTypes(
+                event=AutoEmptyEvent,
+                get=[GetAutoEmpty()],
+                set=SetAutoEmpty,
+                types=(
+                    AutoEmpty.AUTO_EMPTY_OFF,
+                    AutoEmpty.ON_AUTO,
+                    AutoEmpty.ON_SMART,
+                ),
             ),
             work_mode=CapabilitySetTypes(
                 event=WorkModeEvent,

@@ -24,6 +24,7 @@ from .map import (
     PositionType,
 )
 from .network import NetworkInfoEvent
+from .auto_empty import AutoEmpty, AutoEmptyEvent
 from .water_info import SweepType, WaterAmount, WaterInfoEvent
 from .work_mode import WorkMode, WorkModeEvent
 
@@ -31,6 +32,8 @@ if TYPE_CHECKING:
     from deebot_client.models import Room, State
 
 __all__ = [
+    "AutoEmpty"
+    "AutoEmptyEvent"
     "BatteryEvent",
     "CachedMapInfoEvent",
     "CleanJobStatus",

@@ -51,6 +51,8 @@ from deebot_client.events import (
     WaterInfoEvent,
     WorkMode,
     WorkModeEvent,
+    AutoEmpty,
+    AutoEmptyEvent,
 )
 
 if TYPE_CHECKING:
@@ -140,6 +142,7 @@ class CapabilityClean:
     log: CapabilityEvent[CleanLogEvent] | None = None
     preference: CapabilitySetEnable[CleanPreferenceEvent] | None = None
     work_mode: CapabilitySetTypes[WorkModeEvent, WorkMode] | None = None
+    auto_empty: CapabilitySetTypes[AutoEmptyEvent, AutoEmpty] | None = None
 
 
 @dataclass(frozen=True)
