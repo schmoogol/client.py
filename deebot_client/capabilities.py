@@ -12,7 +12,6 @@ from deebot_client.events import (
     AdvancedModeEvent,
     AutoEmpty,
     AutoEmptyEvent,
-    AutoEmptyFrequency,
     AvailabilityEvent,
     BatteryEvent,
     BorderSwitchEvent,
@@ -124,6 +123,14 @@ class CapabilityTypes(Generic[_T]):
 class CapabilitySetTypes(CapabilitySet[_EVENT, _T | str], CapabilityTypes[_T]):
     """Capability for set command and types."""
 
+@dataclass(frozen=True, kw_only=True)
+class CapabilityCleanAutoEmpty(
+    CapabilityEvent[AutoEmptyEvent], CapabilityTypes[AutoEmpty]
+):
+    """Capabilities for auto empty."""
+
+    set: Callable[[bool, AutoEmpty | str | None], SetCommand]
+
 
 @dataclass(frozen=True, kw_only=True)
 class CapabilityCleanAction:
@@ -138,12 +145,12 @@ class CapabilityClean:
     """Capabilities for clean."""
 
     action: CapabilityCleanAction
+    auto_empty: CapabilityCleanAutoEmpty | None = None
     continuous: CapabilitySetEnable[ContinuousCleaningEvent] | None = None
     count: CapabilitySet[CleanCountEvent, int] | None = None
     log: CapabilityEvent[CleanLogEvent] | None = None
     preference: CapabilitySetEnable[CleanPreferenceEvent] | None = None
     work_mode: CapabilitySetTypes[WorkModeEvent, WorkMode] | None = None
-    auto_empty: CapabilitySetTypes[AutoEmptyEvent, AutoEmptyFrequency] | None = None
 
 
 @dataclass(frozen=True)
@@ -189,7 +196,6 @@ class CapabilitySettings:
     """Capabilities for settings."""
 
     advanced_mode: CapabilitySetEnable[AdvancedModeEvent] | None = None
-    auto_empty: CapabilitySetEnable[AutoEmptyEvent, AutoEmpty] | None = None
     carpet_auto_fan_boost: CapabilitySetEnable[CarpetAutoFanBoostEvent] | None = None
     efficiency_mode: CapabilitySetTypes[EfficiencyModeEvent, EfficiencyMode] | None = (
         None

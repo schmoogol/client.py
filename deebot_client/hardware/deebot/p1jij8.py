@@ -109,6 +109,15 @@ DEVICES[short_name(__name__)] = StaticDeviceInfo(
         charge=CapabilityExecute(Charge),
         clean=CapabilityClean(
             action=CapabilityCleanAction(command=Clean, area=CleanArea),
+            auto_empty=CapabilitySetTypes(
+                event=AutoEmptyEvent,
+                get=[GetAutoEmpty()],
+                set=SetAutoEmpty,
+                types=(
+                    AutoEmpty.AUTO,
+                    AutoEmpty.SMART,
+                ),
+            ),
             continuous=CapabilitySetEnable(
                 ContinuousCleaningEvent,
                 [GetContinuousCleaning()],
@@ -119,14 +128,6 @@ DEVICES[short_name(__name__)] = StaticDeviceInfo(
             preference=CapabilitySetEnable(
                 CleanPreferenceEvent, [GetCleanPreference()], SetCleanPreference
             ),
-            auto_empty=CapabilitySetTypes(
-                event=AutoEmptyEvent,
-                get=[GetAutoEmpty()],
-                set=SetAutoEmpty,
-                types=(
-                    AutoEmpty.AUTO,
-                    AutoEmpty.SMART,
-                ),
             ),
             work_mode=CapabilitySetTypes(
                 event=WorkModeEvent,

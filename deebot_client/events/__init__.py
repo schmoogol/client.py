@@ -24,7 +24,7 @@ from .map import (
     PositionType,
 )
 from .network import NetworkInfoEvent
-from .auto_empty import AutoEmpty, AutoEmptyFrequency, AutoEmptyEvent
+from .auto_empty import AutoEmpty, AutoEmptyEvent
 from .water_info import SweepType, WaterAmount, WaterInfoEvent
 from .work_mode import WorkMode, WorkModeEvent
 
